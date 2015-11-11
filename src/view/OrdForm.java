@@ -7,13 +7,18 @@ package view;
 
 import control.OrdenacaoControle;
 import java.io.File;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import model.Fiscalizacao;
 import model.FileChooser;
+import model.FiscalizacaoBuilder;
 import model.FiscalizacaoTableModel;
+import model.ReadWriteObjects;
 
 /**
  *
@@ -25,10 +30,16 @@ public class OrdForm extends javax.swing.JFrame {
     private JTable fiscalizacaoTable;
     private FiscalizacaoJTable selectionSortTable;
     
-    
+
     
     public OrdForm() {
         initComponents();
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            SwingUtilities.updateComponentTreeUI(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public OrdForm(OrdenacaoControle aThis) {
@@ -63,6 +74,18 @@ public class OrdForm extends javax.swing.JFrame {
         selectionSortTable.setModel(new FiscalizacaoTableModel(listaOrdenada));
     }
     
+    public void carregaArquivo(String arquivo) {
+            FiscalizacaoBuilder fiscalizacaoBuilder = new FiscalizacaoBuilder();
+            ReadWriteObjects readWriteObjects = new ReadWriteObjects();
+            List<Fiscalizacao> fiscList = null;
+            try {
+                fiscList = readWriteObjects.read(arquivo, fiscalizacaoBuilder);
+            } catch (IOException e) {
+            }
+            mostraListaDeFiscalizacao(fiscList);
+	}
+    
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -96,7 +119,7 @@ public class OrdForm extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        jLabelQtd = new javax.swing.JLabel();
+        QtdLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -165,7 +188,8 @@ public class OrdForm extends javax.swing.JFrame {
 
         jLabel10.setText("* Ordenado por CNPJ, Ano e Mês");
 
-        jLabelQtd.setText("jLabel11");
+        QtdLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        QtdLabel.setText(" ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -184,7 +208,7 @@ public class OrdForm extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabelQtd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(QtdLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -230,7 +254,7 @@ public class OrdForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelQtd))
+                    .addComponent(QtdLabel))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -269,21 +293,37 @@ public class OrdForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void butLoadFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butLoadFileActionPerformed
-            
         JFileChooser fileChooser = new JFileChooser();
         
-        int retVal;
+        int returnVal = fileChooser.showOpenDialog(null);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            String arquivo = file.getAbsolutePath();
+            txtFile.setText(arquivo);
+            carregaArquivo(arquivo);
+            selectionSortTable.setModel(new FiscalizacaoTableModel(fiscalizacaoList));
+
+            txtInsert.setText(String.valueOf(fiscalizacaoList.get(1).getEmpregador()));
+            QtdLabel.setText(String.valueOf(fiscalizacaoList.size()));
+        }
+        
+        
+        
+        
+        /*
+        JFileChooser fileChooser = new JFileChooser();
         retVal = fileChooser.showOpenDialog(null);
         if (retVal == JFileChooser.APPROVE_OPTION) {
-                File file = fileChooser.getSelectedFile();
-                String arquivo = file.getAbsolutePath();
-                txtFile.setText(arquivo);
-                
-                FileChooser fs = new FileChooser();
-                
-                fiscalizacaoList = fs.load(arquivo);
-                jLabelQtd.setText(String.valueOf(fiscalizacaoList.size())+" fiscalizações.");
-        }   
+            File file = fileChooser.getSelectedFile();
+            String arquivo = file.getAbsolutePath();
+            txtFile.setText(arquivo);
+
+            FileChooser fs = new FileChooser();
+
+            fiscalizacaoList = fs.load(arquivo);
+            jLabelQtd.setText(String.valueOf(fiscalizacaoList.size())+" fiscalizações.");
+        }
+        */
     }//GEN-LAST:event_butLoadFileActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -361,6 +401,7 @@ public class OrdForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel QtdLabel;
     private javax.swing.JButton butLoadFile;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -378,7 +419,6 @@ public class OrdForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JLabel jLabelQtd;
     private javax.swing.JTextField txtBubble;
     private javax.swing.JTextField txtFile;
     private javax.swing.JTextField txtInsert;

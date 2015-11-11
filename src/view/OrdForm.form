@@ -37,7 +37,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabelQtd" max="32767" attributes="0"/>
+                              <Component id="QtdLabel" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="jLabel9" min="-2" pref="54" max="-2" attributes="0"/>
@@ -95,7 +95,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel10" alignment="3" min="-2" pref="16" max="-2" attributes="0"/>
-                  <Component id="jLabelQtd" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="QtdLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -275,9 +275,10 @@
         <Property name="text" type="java.lang.String" value="* Ordenado por CNPJ, Ano e M&#xea;s"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabelQtd">
+    <Component class="javax.swing.JLabel" name="QtdLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel11"/>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="text" type="java.lang.String" value=" "/>
       </Properties>
     </Component>
   </SubComponents>
