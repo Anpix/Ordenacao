@@ -1,19 +1,18 @@
 package model;
 
 import java.util.List;
+
 import javax.swing.table.AbstractTableModel;
 
 public class FiscalizacaoTableModel extends AbstractTableModel  {
 
 	private static final long serialVersionUID = -5174304820197989877L;
-	private List<Fiscalizacao> data;
-        private final List<Fiscalizacao> fiscalizacaoList;
+	private final List<Fiscalizacao> fiscalizacaoList;
 	private final String coluna[] = {"CNPJ", "Ano", "Mês", "Empregador", "Logradouro", "Município", "CEP" };
 
 	public FiscalizacaoTableModel(List<Fiscalizacao> fiscalizacaoList) {
 		super();
 		this.fiscalizacaoList = fiscalizacaoList;
-                this.data = fiscalizacaoList;
 	}
 
 	@Override
@@ -52,11 +51,5 @@ public class FiscalizacaoTableModel extends AbstractTableModel  {
 	public String getColumnName(int columnIndex) {
 		return coluna[columnIndex];
 	}
-
-        //Já que esse tableModel é de livros, vamos fazer um get que retorne um livro inteiro.  
-        //Isso elimina a necessidade de chamar o getValueAt() nas telas.   
-        public Fiscalizacao get(int row) {
-            return fiscalizacaoList.get(row);
-        }
 
 }

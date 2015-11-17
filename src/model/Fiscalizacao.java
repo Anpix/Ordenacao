@@ -75,5 +75,8 @@ public class Fiscalizacao {
 	public void setUf(String uf) {
 		this.uf = uf;
 	}
-		
+        
+	public String toString(){
+            return this.empregador;
+        }	
 }

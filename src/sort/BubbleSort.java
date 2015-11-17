@@ -1,22 +1,12 @@
 package sort;
 
-import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Comparator;
 import java.util.List;
 import model.ContabilizadorDeTempo;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-/**
- *
- * @author Acer
- * @param
- */
+// @author Anpix
+
 public class BubbleSort<T> implements Ordenacao<T> {
 
     private List<T> listaOrdenada;
