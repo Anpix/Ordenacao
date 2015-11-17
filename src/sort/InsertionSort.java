@@ -1,55 +1,72 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package sort;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import model.ContabilizadorDeTempo;
-import model.Ordenacao;
 
-public class InsertionSort<T> implements Ordenacao<T> {
+/**
+ *
+ * @author Lohrann
+ * @param <T>
+ */
+public class InsertionSort<T> implements Ordenacao<T>{
 
-	private List<T> listaOriginal;
-	private List<T> listaOrdenada;
-	private Comparator<T> comparador;
-	private ContabilizadorDeTempo contabilizadorDeTempo;
+    private List<T> listaOrdenada;
+    private Comparator<T> comparador;
+    private List<T> listaOriginal;
+    private ContabilizadorDeTempo cronometro;
+    private List<T> tempoOrd;
 
-	public InsertionSort(List<T> lista, Comparator<T> comparador) {
-		this.listaOriginal = new ArrayList<>(lista);
-		this.comparador = comparador;
-		contabilizadorDeTempo = new ContabilizadorDeTempo();
-		contabilizadorDeTempo.iniciar();
-		this.ordenar();
-		contabilizadorDeTempo.terminar();
-	}
+    public InsertionSort(List<T> lista, Comparator<T> comparador) {
+        this.listaOrdenada = new ArrayList(lista);
+        this.listaOriginal = new ArrayList(lista);
+        this.comparador = comparador;
+        cronometro = new ContabilizadorDeTempo();
+        cronometro.iniciar();
+   
+        ordenar();
+        cronometro.terminar();
 
-	private void ordenar() {
-		this.listaOrdenada = new ArrayList<>(listaOriginal);
-                
-                //Falta Script
-                for(int i=0; i < listaOrdenada.size(); i++) {
-			for(int j=i+1; j < listaOrdenada.size(); j++) {
-				if(comparador.compare(listaOrdenada.get(i), listaOrdenada.get(j)) > 0) {
-					T objeto = this.listaOrdenada.get(i);
-					listaOrdenada.set(i, this.listaOrdenada.get(j));
-					listaOrdenada.set(j, objeto);
-				}
-			}
-		}
-	}
+        
+    }
 
-	@Override
-	public List<T> listaOriginal() {
-            return listaOriginal;
-	}
+    private void ordenar() {
+        listaOrdenada.add(0, null);
+        for (int i = 2; i < listaOrdenada.size(); i++) {
+            T temp = listaOrdenada.get(i);
+            listaOrdenada.set(0, temp);
+            int j = i;
+            while (comparador.compare(listaOrdenada.get(j - 1), temp) > 0) {
+                T aux = listaOrdenada.get(j - 1);
+                listaOrdenada.set(j, aux);
+                j = j - 1;
+            }
+            listaOrdenada.set(j, temp);
+        }
+        listaOrdenada.remove(0);
+    }
 
-	@Override
-	public List<T> listaOrdenada() {
-            return listaOrdenada;
-	}
 
-	@Override
-	public String tempoDeOrdenacao() {
-            return contabilizadorDeTempo.toString();
-	}
+    @Override
+    public String tempoDeOrdenacao() {
+        return cronometro.toString();
+    }
+    
+    @Override
+    public List listaOriginal() {
+        return listaOriginal;
+    }
+
+    @Override
+    public List listaOrdenada() {
+        return listaOrdenada;
+    }
+    
 
 }

@@ -1,26 +1,40 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package model;
 
-import java.io.IOException;
-import java.util.List;
+import javax.swing.JFileChooser;
 
-// @author Anpix
-
+/**
+ *
+ * @author Acer
+ */
 public class FileChooser {
-    
-    public FileChooser() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    public List<Fiscalizacao> load(String arquivo) {
-        FiscalizacaoBuilder fiscalizacaoBuilder = new FiscalizacaoBuilder();
-        ReadWriteObjects readWriteObjects = new ReadWriteObjects();
-        List<Fiscalizacao> fiscalizacaoList = null;
-        try {
-                fiscalizacaoList = readWriteObjects.read(arquivo, fiscalizacaoBuilder);
 
-        } catch (IOException e) {
-                e.printStackTrace();
+    JFileChooser fileChooser;
+    String endereco = null;
+
+    public FileChooser() {
+        this.fileChooser = new JFileChooser();
+    }
+
+    public void open() {
+        int retorno = fileChooser.showOpenDialog(null);
+        if (retorno == JFileChooser.APPROVE_OPTION) {
+            endereco = fileChooser.getSelectedFile().getAbsolutePath();
         }
-        return fiscalizacaoList;
+    }
+
+    public void save() {
+        int retorno = fileChooser.showSaveDialog(null);
+        if (retorno == JFileChooser.APPROVE_OPTION) {
+            endereco = fileChooser.getSelectedFile().getAbsolutePath();
+        }
+    }
+
+    public String getEndereco() {
+        return endereco;
     }
 }

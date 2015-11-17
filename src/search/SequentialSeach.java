@@ -6,11 +6,12 @@ public class SequentialSeach {
     
     
     
-    public int BuscaSimplesEmVetorOrdenado(Vet[],n,k){
+    /*public int BuscaSimplesEmVetorOrdenado(Vet[],n,k){
         
         
-        return 0
-    }
+        
+        return 0;
+    }*/
     
     
 }

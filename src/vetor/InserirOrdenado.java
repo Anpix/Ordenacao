@@ -6,7 +6,7 @@ import java.util.List;
 
 public class InserirOrdenado<T> {
     
-    
+    /*
     public InserirOrdenado(List<T> vet, int n, T e){
         if (n < vet.size()){
             int i = n;
@@ -16,5 +16,5 @@ public class InserirOrdenado<T> {
             }
         }
     }
-    
+    */
 }

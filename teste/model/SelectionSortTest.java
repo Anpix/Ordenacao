@@ -1,5 +1,6 @@
 package model;
 
+import sort.Ordenacao;
 import sort.SelectionSort;
 import static org.junit.Assert.*;
 

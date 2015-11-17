@@ -1,4 +1,4 @@
-package model;
+package sort;
 
 import java.util.List;
 

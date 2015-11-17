@@ -14,7 +14,7 @@ public class BinarySearch<T> {
     
     private int Binary(List<T> vet, int inicio, int fim, T k){
         int pos = (fim + inicio)/2;
-        if (vet[pos].chave [pos] = k){
+        /*if (vet[pos].chave [pos] = k){
             return pos;
         }
         if (inicio >= fim) {
@@ -24,6 +24,7 @@ public class BinarySearch<T> {
             return Binary(vet,pos+1,fim,k);
         }else{
             return Binary(vet,inicio,pos-1,k);
-        }
+        }*/
+        return 0;
     }
 }

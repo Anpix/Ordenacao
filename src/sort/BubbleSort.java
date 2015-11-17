@@ -1,40 +1,57 @@
 package sort;
 
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Comparator;
 import java.util.List;
 import model.ContabilizadorDeTempo;
-import model.Ordenacao;
 
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+/**
+ *
+ * @author Acer
+ * @param
+ */
 public class BubbleSort<T> implements Ordenacao<T> {
 
-    private List<T> listaOriginal;
     private List<T> listaOrdenada;
+    private List<T> listaOriginal;
+    private ContabilizadorDeTempo cronometro;
     private Comparator<T> comparador;
-    private ContabilizadorDeTempo contabilizadorDeTempo;
 
     public BubbleSort(List<T> lista, Comparator<T> comparador) {
-        this.listaOriginal = new ArrayList<>(lista);
+        this.listaOrdenada = new ArrayList(lista);
+        this.listaOriginal = new ArrayList(lista);
         this.comparador = comparador;
-        contabilizadorDeTempo = new ContabilizadorDeTempo();
-        contabilizadorDeTempo.iniciar();
-        this.ordenar();
-        contabilizadorDeTempo.terminar();
+        cronometro = new ContabilizadorDeTempo();
+        cronometro.iniciar();
+        ordenar();
+        cronometro.terminar();
     }
 
     private void ordenar() {
-        this.listaOrdenada = new ArrayList<>(listaOriginal);
-
-        //Falta script
-        for(int i=0; i < listaOrdenada.size(); i++) {
-            for(int j=i+1; j < listaOrdenada.size(); j++) {
-                if(comparador.compare(listaOrdenada.get(i), listaOrdenada.get(j)) > 0) {
-                    T objeto = this.listaOrdenada.get(i);
-                    listaOrdenada.set(i, this.listaOrdenada.get(j));
-                    listaOrdenada.set(j, objeto);
+        int i, j;
+        for (i = listaOrdenada.size() - 1; i > 0; i--) {
+            for (j = 0; j < i; j++) {
+                if (comparador.compare(listaOrdenada.get(j), listaOrdenada.get(j + 1)) > 0) {
+                    T aux = listaOrdenada.get(j);
+                    listaOrdenada.set(j, listaOrdenada.get(j + 1));
+                    listaOrdenada.set(j + 1, aux);
                 }
+                System.out.println("Trocou! Posição " + i + "agora: " + listaOrdenada.get(i));
             }
         }
+
+    }
+
+    @Override
+    public String tempoDeOrdenacao() {
+        return cronometro.toString();
     }
 
     @Override
@@ -47,8 +64,4 @@ public class BubbleSort<T> implements Ordenacao<T> {
         return listaOrdenada;
     }
 
-    @Override
-    public String tempoDeOrdenacao() {
-        return contabilizadorDeTempo.toString();
-    }
 }

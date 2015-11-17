@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class RemoverNaoOrdenado<T> {
     
-    
+    /*
     public RemoverNaoOrdenado(List<T> vet, int n, T k){
         if (n != 0) {
             int i = Buscar(vet,n,k);
@@ -24,5 +24,5 @@ public class RemoverNaoOrdenado<T> {
         }
     
     }
-    
+    */
 }
