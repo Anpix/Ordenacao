@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sort;
 
 import java.util.ArrayList;
@@ -10,20 +5,11 @@ import java.util.List;
 import model.Fiscalizacao;
 import model.FiscalizacaoBuilder;
 import model.FiscalizacaoComparador;
-import sort.InsertionSort;
-import sort.Ordenacao;
-import sort.SelectionSort;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author Lohrann
- */
+// Author: Anpix
+
 public class InsertionSortTest {
 
     private String linha[] = {

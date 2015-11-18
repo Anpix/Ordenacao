@@ -1,15 +1,11 @@
 package sort;
 
-import sort.Ordenacao;
 import model.FiscalizacaoComparador;
 import model.FiscalizacaoBuilder;
-import sort.SelectionSort;
 import model.Fiscalizacao;
 import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import org.junit.Test;
 
 public class SelectionSortTest {
